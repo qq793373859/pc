@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 
-import springboot.bean.user.User;
-import springboot.service.user.UserService;
+import springboot.bean.admin.user.User;
+import springboot.service.admin.user.UserService;
 @RestController
 public class Test {
 	@Autowired

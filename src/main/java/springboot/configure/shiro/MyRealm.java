@@ -1,9 +1,7 @@
 package springboot.configure.shiro;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.shiro.SecurityUtils;
@@ -19,8 +17,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import springboot.bean.user.User;
-import springboot.service.user.UserService;
+import springboot.bean.admin.user.User;
+import springboot.service.admin.user.UserService;
 
 public class MyRealm extends AuthorizingRealm {
 	@Autowired
