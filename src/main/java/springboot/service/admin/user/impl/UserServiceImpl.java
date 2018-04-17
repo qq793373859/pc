@@ -1,4 +1,4 @@
-package springboot.service.user.impl;
+package springboot.service.admin.user.impl;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import springboot.bean.user.User;
-import springboot.mapper.user.UserMapper;
-import springboot.service.user.UserService;
+import springboot.bean.admin.user.User;
+import springboot.mapper.admin.user.UserMapper;
+import springboot.service.admin.user.UserService;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{

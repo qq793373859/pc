@@ -1,8 +1,8 @@
-package springboot.service.user;
+package springboot.service.admin.user;
 
 import java.util.List;
 
-import springboot.bean.user.User;
+import springboot.bean.admin.user.User;
 
 public interface UserService{
 	public User getUser(int i);

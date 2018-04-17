@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import springboot.bean.user.User;
+import springboot.bean.admin.user.User;
 import springboot.common.MD5Utils;
 import springboot.common.Message;
-import springboot.service.user.UserService;
+import springboot.service.admin.user.UserService;
 
 @Controller
 @RequestMapping("/register")
