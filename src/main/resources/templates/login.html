@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:include="/common/common::common"></div>
+    <head>
+        <meta content="text/html;charset=UTF-8" />
+	    <link rel="stylesheet" th:href="@{/css/common/animate.min.css}">
+	    <link rel="stylesheet" th:href="@{/css/common/nprogress.css}">
+	    <link rel="stylesheet" th:href="@{/css/common/font-awesome.min.css}">
+	    <link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">
+	    <link rel="stylesheet" th:href="@{/css/common/custom.min.css}">
+	    <script th:src="@{/js/login.js}"></script>
+    </head>
+
+    <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>Login Form</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" name="username1" id="username1"/>
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" name="password1" id="password1"/>
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="javascript:void(0)" id="toLogin" style="font-size:20px;">登录</a>
+                <a class="reset_pass" href="#" style="font-size:20px;">忘记密码?</a>
+              </div>
+              <div class="clearfix"></div>
+              <div class="separator">
+                <p class="change_link" style="font-size:20px;">没有账号?
+                  <a href="#signup" class="to_register" style="font-size:20px;"> 注册账号 </a>
+                </p>
+                <div class="clearfix"></div>
+                <br />
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>注册账号</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" name="username" id="username"/>
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" name="email" id="email"/>
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" name="password" id="password"/>
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="javascript:void(0)" id="to_register" style="font-size:20px;">注册</a>
+              </div>
+              <div class="clearfix"></div>
+              <div class="separator">
+                <p class="change_link" style="font-size:20px;">已有账号 ?
+                  <a href="#signin" class="to_register" style="font-size:20px;"> 去登录 </a>
+                </p>
+                <div class="clearfix"></div>
+                <br />
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
