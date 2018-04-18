@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<body th:fragment="left">
+	<!-- sidebar menu -->
+	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+		<div class="menu_section">
+			<h3>General</h3>
+			<ul class="nav side-menu">
+				<li><a><i class="fa fa-home"></i> Home <span
+						class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+						<li><a href="index.html">Dashboard</a></li>
+						<li><a href="index.html">Dashboard2</a></li>
+						<li><a href="index.html">Dashboard3</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+     var a = function() {
+          $(".right_col").css("min-height", $(window).height());
+          var a = $("body").outerHeight()
+            , b = $("body").hasClass("footer_fixed") ? -10 : $("footer").height()
+            , c = $(".left_col").eq(1).height() + $(".sidebar-footer").height()
+            , d = a < c ? c : a;
+          d -= $(".nav_menu").height() + b,
+          $(".right_col").css("min-height", d)
+      };
+   $("#sidebar-menu").find("a").on("click", function(b) {
+          var c = $(this).parent();
+          c.is(".active") ? (c.removeClass("active active-sm"),
+          $("ul:first", c).slideUp(function() {
+              a()
+          })) : (c.parent().is(".child_menu") ? $BODY.is(".nav-sm") && ($SIDEBAR_MENU.find("li").removeClass("active active-sm"),
+          $SIDEBAR_MENU.find("li ul").slideUp()) : ($SIDEBAR_MENU.find("li").removeClass("active active-sm"),
+          $SIDEBAR_MENU.find("li ul").slideUp()),
+          c.addClass("active"),
+          $("ul:first", c).slideDown(function() {
+             a();
+          }))
+      });
+  </script>
+</head>
+</html>
