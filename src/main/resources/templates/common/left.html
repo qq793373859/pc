@@ -32,9 +32,9 @@
           c.is(".active") ? (c.removeClass("active active-sm"),
           $("ul:first", c).slideUp(function() {
               a()
-          })) : (c.parent().is(".child_menu") ? $BODY.is(".nav-sm") && ($SIDEBAR_MENU.find("li").removeClass("active active-sm"),
-          $SIDEBAR_MENU.find("li ul").slideUp()) : ($SIDEBAR_MENU.find("li").removeClass("active active-sm"),
-          $SIDEBAR_MENU.find("li ul").slideUp()),
+          })) : (c.parent().is(".child_menu") ? $("body").is(".nav-sm") && ( $("#sidebar-menu").find("li").removeClass("active active-sm"),
+  		  $("#sidebar-menu").find("li ul").slideUp()) : ($("#sidebar-menu").find("li").removeClass("active active-sm"),
+		  $("#sidebar-menu").find("li ul").slideUp()),
           c.addClass("active"),
           $("ul:first", c).slideDown(function() {
              a();
