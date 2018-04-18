@@ -199,8 +199,6 @@
       </div>
   </body>
   <script type="text/javascript">
-  ﻿
-  ﻿
 
      var a = function() {
           $(".right_col").css("min-height", $(window).height());
@@ -223,7 +221,16 @@
           $("ul:first", c).slideDown(function() {
              a();
           }))
-      })
+      });
+   $("#menu_toggle").on("click", function() {
+	    $("body").hasClass("nav-md") ? ($("#sidebar-menu").find("li.active ul").hide(),
+	    $("#sidebar-menu").find("li.active").addClass("active-sm").removeClass("active")) : ($("#sidebar-menu").find("li.active-sm ul").show(),
+	    $("#sidebar-menu").find("li.active-sm").addClass("active").removeClass("active-sm")),
+	    $("body").toggleClass("nav-md nav-sm"),
+	    a()
+	});
+   
+      
   
   </script>
 </head>
