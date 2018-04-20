@@ -78,7 +78,7 @@ public class MyRealm extends AuthorizingRealm {
 	    if(null != userList && userList.size()>0){
 	        user = userList.get(0);
 	    }
-	    if(null == user) {
+	    if(null == user || userList.size() == 0) {
 	        throw new AccountException("帐号或密码不正确！");
 	    }
 	    return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
