@@ -3,29 +3,31 @@ package springboot.bean.admin.user;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class User implements Serializable{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String id;
 
     private String username;
 
     private String password;
 
     private String email;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date createTime;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date updateTime;
 
-	public Integer getId() {
+	public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

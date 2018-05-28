@@ -17,7 +17,7 @@ public class Test {
 
     @RequestMapping("/test")
     public User test() {
-        return userService.getUser(1);
+        return userService.getUser("123");
     }
     
     @RequestMapping("/testAll")

@@ -1,0 +1,112 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<div th:include="/common/common::common"></div>
+<head>
+<meta content="text/html;charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/css/common/animate.min.css}">
+<link rel="stylesheet" th:href="@{/css/common/nprogress.css}">
+<link rel="stylesheet" th:href="@{/css/common/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/common/custom.min.css}">
+<script th:src="@{/js/login.js}"></script>
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div class="left_col scroll-view">
+					<div th:include="/common/left::left"></div>
+				</div>
+			</div>
+			<div th:include="/common/header::header"></div>
+			<div class="right_col" role="main" style="min-height: 1000px;"><br>
+			<div id="app">
+				<i-form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80">
+			        <form-item label="角色名" prop="name">
+			            <i-input type="text" v-model="formCustom.name" style="width:300px;"></i-input>
+			        </form-item>
+			        <form-item label="角色类别" prop="type">
+			        
+			        <i-select v-model="formCustom.type" style="width:300px;">
+		                <i-option value="">请选择</i-option>
+		                <i-option value="1">管理员</i-option>
+		                <i-option value="2">普通用户</i-option>
+		            </i-select>
+		            
+			        </form-item>
+			        <form-item>
+			            <i-button type="primary" @click="handleSubmit('formCustom')">Submit</i-button>
+			            <i-button type="ghost" @click="handleReset('formCustom')" style="margin-left: 8px">Reset</i-button>
+			        </form-item>
+			    </i-form>
+		    </div>
+			</div>
+		</div>
+	</div>
+</body>
+</head>
+<script>
+var vue =  new Vue({
+	el: '#app',
+	data () {
+        const validateName = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入角色名'));
+            } else {
+                callback();
+            }
+        };
+        const validateSelect = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入选择角色类别'));
+            } else {
+                callback();
+            }
+        };
+        
+        return {
+            formCustom: {
+                name: '',
+                type: ''
+            },
+            ruleCustom: {
+            	name: [
+                    { validator: validateName, trigger: 'blur' }
+                ],
+                type: [
+                    { validator: validateSelect, trigger: 'blur' }
+                ]
+            }
+        }
+    },
+    methods: {
+        handleSubmit (name) {
+            this.$refs[name].validate((valid) => {
+                if (valid) {
+                	var th = this;
+                	$.ajax({ 
+            			url: "/role/add", 
+            			type:'post',
+            			data: this.formCustom,
+            			async : false,
+            			dataType:'json',
+            			success: function(data){
+            				if(data.type == 'success'){
+            					th.$Message.success(data.content);
+            					th.$refs['formCustom'].resetFields();
+            				}else{
+            					th.$Message.error(data.content);
+            				}
+            	      }}); 
+                } else {
+                    this.$Message.error('检查失败,请检查填写内容!');
+                }
+            })
+        },
+        handleReset (name) {
+            this.$refs[name].resetFields();
+        }
+    }
+	});
+</script>
+</html>

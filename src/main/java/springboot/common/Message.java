@@ -5,7 +5,7 @@ import java.util.List;
 public class Message {
 	private String type;
 	private String content;
-	private Integer count;
+	private Long count;
 	private List<?> list;
 	public String getType() {
 		return type;
@@ -19,10 +19,10 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
-	public void setCount(Integer count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 	public List<?> getList() {

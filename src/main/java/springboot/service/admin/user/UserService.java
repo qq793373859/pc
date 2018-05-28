@@ -5,7 +5,7 @@ import java.util.List;
 import springboot.bean.admin.user.User;
 
 public interface UserService{
-	public User getUser(int i);
+	public User getUser(String i);
 	
 	public List<User> getUserAll();
 	

@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper mapper;
 	
-	public User getUser(int id) {
+	public User getUser(String id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
