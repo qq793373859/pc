@@ -11,4 +11,6 @@ public interface PermissionService{
 	public List<Permission> getPermissionByPermission(Permission permission);
 
 	public void insert(Permission permission);
+	
+	public List<Permission> getMenus(List<String> list);
 }

@@ -1,0 +1,110 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<div th:include="/common/common::common"></div>
+<head>
+<meta content="text/html;charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/css/common/animate.min.css}">
+<link rel="stylesheet" th:href="@{/css/common/nprogress.css}">
+<link rel="stylesheet" th:href="@{/css/common/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/common/custom.min.css}">
+<script th:src="@{/js/login.js}"></script>
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div class="left_col scroll-view">
+					<div th:include="/common/left::left"></div>
+				</div>
+			</div>
+			<div th:include="/common/header::header"></div>
+			<div class="right_col" role="main" style="min-height: 1000px;"><br>
+			<input type="hidden" th:value="${roleId}" id="roleId">
+			<div id="app">
+			    <Tree :data="historyData" show-checkbox multiple ref="tree"></Tree>
+			    <i-button type="primary" shape="circle" @click="addUserRole">保存</i-button>
+		    </div>
+			</div>
+		</div>
+	</div>
+</body>
+</head>
+<script>
+var vue =  new Vue({
+	el: '#app',
+	data (){
+        return {
+        	historyData:[],
+        	fruit: []
+        }
+    },
+    methods: {
+    	// 1
+        querytable(evt){
+            var dataSource = [];
+        	$.ajax({ 
+    			url: "/rolePermission/tree", 
+    			type:'post',
+    			data: {
+    				roleId:$("#roleId").val()
+    			},
+    			async : false,
+    			dataType:'json',
+    			success: function(data){
+    				if(data.type == 'success'){
+    					dataSource = data;
+    					console.log(dataSource.list);
+    				}
+    	      }}); 
+        	this.historyData = dataSource.list;
+     	    //for (var i = 0; i < dataSource.list1.length; i++) {
+     	    //	this.fruit.push(dataSource.list1[i].permissionId)
+			//}
+      },
+      // 2
+      addUserRole(){
+    	  var arr = this.$refs.tree.getCheckedNodes();
+    	  str = '';
+    	  if(arr.length > 0){
+    		  for (var i = 0; i < arr.length; i++) {
+        		  str += arr[i].id + ",";
+    		  }
+    	  }
+    	  var th = this;
+    	  $.ajax({ 
+  			url: "/rolePermission/add", 
+  			type:'post',
+  			data: {
+  				str:str,
+  				roleId:$("#roleId").val()
+  			},
+  			async : false,
+  			dataType:'json',
+  			//contentType:'application/json',
+  			success: function(data){
+  				if(data.type == 'success'){
+  					th.$Notice.success({
+  					    top: 50,
+  					    duration: 3,
+  					    title:'通知',
+  					    desc : data.content
+  					});
+  				}else{
+  					th.$Notice.error({
+  					    top: 50,
+  					    duration: 3,
+  					    title:'通知',
+  					    desc : data.content
+  					});
+  				}
+  	      }}); 
+      }
+    },
+      //当页面加载的时候执行
+         created () {
+    	  this.querytable();
+        }
+	});
+</script>
+</html>

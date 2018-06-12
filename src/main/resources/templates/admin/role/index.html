@@ -73,7 +73,7 @@ var vue =  new Vue({
                 {
                     title: '操作',
                     key: 'action',
-                    width: 150,
+                    width: 300,
                     align: 'center',
                     render: (h, params) => {
                         return h('div', [
@@ -91,6 +91,20 @@ var vue =  new Vue({
                                     }
                                 }
                             }, 'View'),
+                            h('Button', {
+                                props: {
+                                    type: 'primary',
+                                    size: 'small'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.rolePermission(params.row.id)
+                                    }
+                                }
+                            }, '关联权限'),
                             h('Button', {
                                 props: {
                                     type: 'error',
@@ -147,11 +161,8 @@ var vue =  new Vue({
     	  this.pageNum = 1;
         },
         //3
-        show(index){
-        	 this.$Modal.info({
-                 title: 'User Info',
-                 content: `Name：${this.historyData[index].name}<br>createTime：${this.historyData[index].createTime}`
-             })
+        rolePermission(id){
+        	 window.location.href = '/rolePermission/index?roleId=' + id ;
         },
         // 4
         addRole () {

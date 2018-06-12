@@ -42,6 +42,7 @@
 			        <form-item label="所属菜单" prop="parentId">
 			        <i-select v-model="formCustom.parentId" style="width:300px;" filterable>
 		                <i-option value="">请选择</i-option>
+		                <i-option value="0">系统</i-option>
 		                <i-option v-for="item in List" v-if="item.level != '3'" :value="item.id">
 		                	{{ item.level == '1' ? '主菜单--' : '子菜单--' }} {{item.name}}
 		                </i-option>

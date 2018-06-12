@@ -22,15 +22,18 @@
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 		<div class="menu_section">
 			<ul class="nav side-menu">
-				<li><a>
-						<i class="fa fa-home"></i> 系统管理
+				<li th:each="ps : ${ps}" th:if="${ps.level} == '1'">
+					<a>
+						<i class="fa fa-home"></i>
+						<span th:text="${ps.name}"></span>
 						<span class="fa fa-chevron-down"></span>
 					</a>
 					<ul class="nav child_menu">
-						<li class="current-page"><a th:href="@{/user/index}">用户管理</a></li>
-						<li><a th:href="@{/role/index}">角色管理</a></li>
-						<li><a th:href="@{/permission/index}">权限管理</a></li>
+						<li th:each="ps1 : ${ps1}" th:if="${ps1.parentId} == ${ps.id}"> 
+							<a th:href="@{${ps1.url}}" th:text="${ps1.name}"></a>
+						</li>
 					</ul>
+					<!--th:if="${ps1.parentId} == ${ps.id}"  -->
 				</li>
 			</ul>
 		</div>

@@ -7,34 +7,33 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import springboot.bean.admin.user.Permission;
+import springboot.bean.admin.user.UserRole;
 import springboot.mapper.admin.user.PermissionMapper;
+import springboot.mapper.admin.user.UserRoleMapper;
 import springboot.service.admin.user.PermissionService;
+import springboot.service.admin.user.UserRoleService;
 @Service
 @Transactional
-public class PermissionServiceImpl implements PermissionService{
+public class UserRoleServiceImpl implements UserRoleService{
 
 	@Autowired
-	private PermissionMapper mapper;
+	private UserRoleMapper mapper;
 
 	@Override
-	public Permission getPermissionById(String id) {
-		return mapper.selectByPrimaryKey(id);
+	public void insert(UserRole role) {
+		mapper.insert(role);
+		
 	}
-
 	@Override
-	public List<Permission> getPermissionByPermission(Permission permission) {
-		return mapper.select(permission);
+	public List<UserRole> getUserRoles(UserRole role) {
+		return mapper.select(role);
 	}
-
 	@Override
-	public void insert(Permission permission) {
-		mapper.insert(permission);
+	public void delete(UserRole role) {
+		mapper.delete(role);
 	}
+	
 
-	@Override
-	public List<Permission> getMenus(List<String> list) {
-		return mapper.getMenus(list);
-	}
 	
 
 }

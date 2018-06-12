@@ -2,6 +2,8 @@ package springboot.bean.admin.user;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Permission {
     private String id;
 
@@ -12,9 +14,9 @@ public class Permission {
     private String level;
 
     private String parentId;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date createTime;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date updateTime;
     
     private String isView;

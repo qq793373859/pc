@@ -1,5 +1,6 @@
 package springboot.configure.shiro;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,12 +18,20 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import springboot.bean.admin.user.Permission;
 import springboot.bean.admin.user.User;
+import springboot.bean.admin.user.UserRole;
+import springboot.service.admin.user.PermissionService;
+import springboot.service.admin.user.UserRoleService;
 import springboot.service.admin.user.UserService;
 
 public class MyRealm extends AuthorizingRealm {
 	@Autowired
     private UserService userService;
+	@Autowired
+    private UserRoleService userRoleService;
+	@Autowired
+    private PermissionService permissionService;
 	/**
 	* 授权
 	 */
@@ -34,25 +43,25 @@ public class MyRealm extends AuthorizingRealm {
 	    String userId = token.getId().toString();
 	    SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
 	    //根据用户ID查询角色（role），放入到Authorization里。
-	    /*Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("user_id", userId);
-	    List<SysRole> roleList = sysRoleService.selectByMap(map);
-	    Set<String> roleSet = new HashSet<String>();
-	    for(SysRole role : roleList){
-	        roleSet.add(role.getType());
-	    }*/
-	    //实际开发，当前登录用户的角色和权限信息是从数据库来获取的，我这里写死是为了方便测试
-	    Set<String> roleSet = new HashSet<String>();
-	    roleSet.add("100002");
-	    info.setRoles(roleSet);
-	    //根据用户ID查询权限（permission），放入到Authorization里。
-	    /*List<SysPermission> permissionList = sysPermissionService.selectByMap(map);
+	    UserRole userRole = new UserRole();
+		userRole.setUserId(userId);
+		List<UserRole> list = userRoleService.getUserRoles(userRole);
+		List<String> strs = new ArrayList<String>();
+		if(null != list && !list.isEmpty()){
+			for (int i = 0; i < list.size(); i++) {
+				strs.add(list.get(i).getRoleId());
+			}
+		}
+		Set<String> str = new HashSet<String>(strs);
+	    info.setRoles(str);
+	    
 	    Set<String> permissionSet = new HashSet<String>();
-	    for(SysPermission Permission : permissionList){
-	        permissionSet.add(Permission.getName());
-	    }*/
-	    Set<String> permissionSet = new HashSet<String>();
-	    permissionSet.add("权限添加");
+	    List<Permission> ps = permissionService.getMenus(strs);
+	    if(null != ps && !ps.isEmpty()){
+			for (int i = 0; i < ps.size(); i++) {
+				permissionSet.add(ps.get(i).getIsView());
+			}
+		}
 	    info.setStringPermissions(permissionSet);
 	       return info;
 	}
