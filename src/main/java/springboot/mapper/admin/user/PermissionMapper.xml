@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springboot.mapper.admin.user.PermissionMapper">
+	<select id="getMenus" resultType="springboot.bean.admin.user.Permission" parameterType="java.util.List">
+		
+		SELECT
+			DISTINCT
+			t2.id,
+			t2.url,
+			t2. NAME,
+			t2.is_view,
+			t2.`level`,
+			t2.parent_id as parentId
+		FROM
+			role_permission t1
+		LEFT JOIN permission t2 ON t1.permission_id = t2.id
+		WHERE
+			1=1
+		and
+			t1.role_id IN
+			<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+		     	#{item}  
+		     </foreach> 
+		ORDER BY `level`, parent_id
+	</select>
+</mapper>
+

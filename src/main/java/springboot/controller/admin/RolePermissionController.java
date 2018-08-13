@@ -24,10 +24,10 @@ import springboot.service.admin.user.RolePermissionService;
 @Controller
 public class RolePermissionController {
 	@Autowired
-	private RolePermissionService rolePermissionService;
+    private RolePermissionService rolePermissionService;
 	@Autowired
 	private PermissionService permissionService;
-
+	
 	/**
 	 * 用户关联角色页
 	 * @return
@@ -37,7 +37,7 @@ public class RolePermissionController {
 		model.addAttribute("roleId", roleId);
 		return "/admin/rolePermission/index";
 	}
-
+	
 	@RequestMapping("/rolePermission/getPermissions")
 	@ResponseBody
 	public Message getRoles(String roleId){
@@ -56,7 +56,7 @@ public class RolePermissionController {
 		}
 		return message;
 	}
-
+	
 	@RequestMapping("/rolePermission/add")
 	@ResponseBody
 	public Message add(String str ,String roleId){
@@ -101,8 +101,8 @@ public class RolePermissionController {
 		}
 		return message;
 	}
-
-
+	
+	
 	@RequestMapping("/rolePermission/tree")
 	@ResponseBody
 	public Message tree(String roleId){
@@ -114,7 +114,7 @@ public class RolePermissionController {
 			RolePermission rolePermission = new RolePermission();
 			rolePermission.setRoleId(roleId);
 			//List<RolePermission> rolePermissions = rolePermissionService.getRolePermissions(rolePermission);
-
+			
 			List<Tree> trees = new ArrayList<Tree>();
 			// 主菜单
 			for (int i = 0; i < list.size(); i++) {
@@ -137,9 +137,9 @@ public class RolePermissionController {
 					tree.setPid(permission.getParentId());
 					trees.add(tree);
 				}
-
+				
 			}
-
+			
 			// 子菜单
 			for (int i = 0; i < list.size(); i++) {
 				Permission permission = list.get(i);
@@ -168,13 +168,13 @@ public class RolePermissionController {
 								t2.add(tree);
 								trees.get(j).setChildren(t2);
 							}
-
+							
 						}
 					}
 				}
-
+				
 			}
-
+			
 			// 功能
 			for (int i = 0; i < list.size(); i++) {
 				Permission permission = list.get(i);
@@ -194,39 +194,31 @@ public class RolePermissionController {
 					}
 					tree.setTitle(permission.getName());
 					tree.setPid(permission.getParentId());
-
+					
 					for (int j = 0; j < trees.size(); j++) {
 						if(null != trees.get(j).getChildren() && trees.get(j).getChildren().size() > 0 ){
-
+							
 							for (int j2 = 0; j2 < trees.get(j).getChildren().size(); j2++) {
 								List<Tree> t3 = new ArrayList<Tree>();
 								if(trees.get(j).getChildren().get(j2).getId().equals(tree.getPid())){
 									t3.add(tree);
-
-									if(null != trees.get(j).getChildren().get(j2).getChildren() && !trees.get(j).getChildren().get(j2).getChildren().isEmpty()){
-										//trees.get(j).getChildren().get(j2).setChildren(t3);
-										List<Tree> tt = trees.get(j).getChildren().get(j2).getChildren();
-										tt.add(tree);
-										trees.get(j).getChildren().get(j2).setChildren(tt);
-									}else{
-										trees.get(j).getChildren().get(j2).setChildren(t3);
-									}
+									trees.get(j).getChildren().get(j2).setChildren(t3);
 								}
-
+								
 							}
-
+							
 						}
 					}
 				}
-
+				
 			}
-
+			
 			message.setType("success");
-
+			
 			message.setList(trees);
-
-
-
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			message.setType("error");
